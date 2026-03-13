@@ -1,30 +1,43 @@
-// useCase 2: HardCodePalindrome
-public class PalindromeCheckerApp {
-     public static void main (String[] args){
-         System.out.println("Welcome to Palindrome Checker AppManagement System");
-         System.out.println("Modify this logic to usecase 2");
+import java.util.Scanner;
 
-         // Hardcoded string
-         String input = "madam";
+public class UseCase4PalindromeCheckerApp {
 
-         boolean isPalindrome = true;
+    /**
+     * Application entry point for UC4.
+     * @param args Command-line arguments
+     */
+    public static void main(String[] args) {
 
-         // Loop only till half of the string length
-         for (int i = 0; i < input.length() / 2; i++) {
+        Scanner scanner = new Scanner(System.in);
 
-             // Compare characters from both ends
-             if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
-                 isPalindrome = false;
-                 break;
-             }
-         }
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
 
-         // Display result
-         if (isPalindrome) {
-             System.out.println(input + " is a palindrome.");
-         } else {
-             System.out.println(input + " is not a palindrome.");
-         }
+        // Convert string to character array
+        char[] chars = input.toCharArray();
 
-     }
+        int start = 0;
+        int end = chars.length - 1;
+
+        boolean isPalindrome = true;
+
+        // Two-pointer comparison
+        while (start < end) {
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
+
+        // Display result
+        if (isPalindrome) {
+            System.out.println("The string is a palindrome.");
+        } else {
+            System.out.println("The string is not a palindrome.");
+        }
+
+        scanner.close();
+    }
 }
