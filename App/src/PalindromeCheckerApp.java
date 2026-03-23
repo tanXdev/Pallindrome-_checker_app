@@ -1,30 +1,79 @@
-// useCase 2: HardCodePalindrome
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+/**
+ * ------------------------------------------------------------
+ * MAIN CLASS - UseCase7PalindromeCheckerApp
+ * ------------------------------------------------------------
+ *
+ * Use Case 7: Deque Based Optimized Palindrome Checker
+ *
+ * Description:
+ * This class validates a palindrome using a Deque
+ * (Double Ended Queue).
+ *
+ * Characters are inserted into the deque and then
+ * compared by removing elements from both ends:
+ *
+ * - removeFirst()
+ * - removeLast()
+ *
+ * This avoids reversing the string and provides an
+ * efficient front-to-back comparison approach.
+ *
+ * This use case demonstrates optimal bidirectional
+ * traversal using Deque.
+ *
+ * @author Developer
+ * @version 7.0
+ */
+
 public class PalindromeCheckerApp {
-     public static void main (String[] args){
-         System.out.println("Welcome to Palindrome Checker AppManagement System");
-         System.out.println("Modify this logic to usecase 2");
 
-         // Hardcoded string
-         String input = "madam";
+    /**
+     * Application entry point for UC7.
+     *
+     * @param args Command-line arguments
+     */
+    public static void main(String[] args) {
 
-         boolean isPalindrome = true;
+        Scanner scanner = new Scanner(System.in);
 
-         // Loop only till half of the string length
-         for (int i = 0; i < input.length() / 2; i++) {
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
 
-             // Compare characters from both ends
-             if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
-                 isPalindrome = false;
-                 break;
-             }
-         }
+        // Convert to lowercase and remove spaces (optional improvement)
+        input = input.replaceAll("\\s+", "").toLowerCase();
 
-         // Display result
-         if (isPalindrome) {
-             System.out.println(input + " is a palindrome.");
-         } else {
-             System.out.println(input + " is not a palindrome.");
-         }
+        // Create a Deque
+        Deque<Character> deque = new LinkedList<>();
 
-     }
+        // Insert characters into deque
+        for (char ch : input.toCharArray()) {
+            deque.addLast(ch);
+        }
+
+        boolean isPalindrome = true;
+
+        // Compare characters from both ends
+        while (deque.size() > 1) {
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            if (first != last) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        // Output result
+        if (isPalindrome) {
+            System.out.println("The string is a Palindrome.");
+        } else {
+            System.out.println("The string is NOT a Palindrome.");
+        }
+
+        scanner.close();
+    }
 }
